@@ -8,26 +8,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --white: #FFFFFF;
-            --dark: #1A1A1A;
-            --light-dark: #333;
+            /* Couleurs */
+            --color-white: #FFFFFF;
+            --color-dark: #1A1A1A;
+            --color-light-dark: #333333;
+            --color-hover: #e6e6e6;
+
+            /* Dimensions */
             --transition-speed: 0.3s;
             --max-width: 1200px;
             --header-height: 60px;
+
+            /* Typographie */
+            --font-family: 'Inter', sans-serif;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--font-family);
         }
 
         body {
-            background: var(--dark);
-            color: white;
+            background: var(--color-dark);
+            color: var(--color-white);
             line-height: 1.6;
-            overflow-x: hidden; /* Empêche le défilement horizontal dû aux animations */
+            overflow-x: hidden;
             transition: opacity var(--transition-speed);
             opacity: 1;
         }
@@ -37,8 +44,7 @@
         }
 
         header {
-            background: rgba(0,0,0,0.9);
-            padding: 0 1rem;
+            background: rgba(0, 0, 0, 0.9);
             position: fixed;
             width: 100%;
             z-index: 100;
@@ -47,6 +53,7 @@
             height: var(--header-height);
             display: flex;
             align-items: center;
+            padding: 0 1rem;
         }
 
         nav {
@@ -58,15 +65,10 @@
             margin: 0 auto;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
         .logo img {
-            max-height: 40px; /* Ajustez cette valeur selon la hauteur souhaitée */
+            max-height: 40px;
             width: auto;
-            margin-right: 10px; /* Espacement entre l'image et le texte */
+            margin-right: 10px;
         }
 
         .nav-links {
@@ -75,11 +77,11 @@
         }
 
         .nav-links a {
-            color: white;
+            color: var(--color-white);
             text-decoration: none;
             transition: color var(--transition-speed);
-            font-weight: 600; /* En semi-gras */
-            padding: 0.5rem 0; /* Augmente la zone cliquable */
+            font-weight: 600;
+            padding: 0.5rem 0;
             position: relative;
         }
 
@@ -88,7 +90,7 @@
             display: block;
             width: 0;
             height: 2px;
-            background: var(--white);
+            background: var(--color-white);
             transition: width var(--transition-speed);
             position: absolute;
             bottom: 0;
@@ -108,13 +110,13 @@
         .hamburger div {
             width: 25px;
             height: 3px;
-            background: white;
+            background: var(--color-white);
             margin: 4px;
             transition: all var(--transition-speed);
         }
 
         .hero {
-            position: relative; /* Nécessaire pour positionner les comètes */
+            position: relative;
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080') center/cover;
             display: flex;
@@ -123,11 +125,10 @@
             align-items: center;
             text-align: center;
             padding: 1rem;
-            margin-top: var(--header-height); /* Hauteur de l'en-tête */
-            overflow: hidden; /* Masque les comètes en dehors de la section héro */
+            margin-top: var(--header-height);
+            overflow: hidden;
         }
 
-        /* Styles pour les comètes */
         .comet {
             position: absolute;
             top: -10%;
@@ -135,7 +136,8 @@
             height: 60px;
             opacity: 0.8;
             animation: moveComet 5s linear infinite;
-            z-index: 1; /* Au-dessus des autres éléments */
+            z-index: 1;
+            will-change: transform, top, opacity;
         }
 
         .comet img {
@@ -159,20 +161,20 @@
 
         .hero h1 {
             position: relative;
-            z-index: 2; /* Au-dessus des comètes */
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--white);
+            color: var(--color-white);
             margin-bottom: 1rem;
-            font-weight: 700; /* En gras */
+            font-weight: 700;
         }
 
         .hero h1 img {
-            max-height: 60px; /* Ajustez cette valeur selon la hauteur souhaitée */
+            max-height: 60px;
             width: auto;
-            margin-right: 10px; /* Espacement entre l'image et le texte */
+            margin-right: 10px;
         }
 
         .hero p {
@@ -181,7 +183,7 @@
             font-size: 1.2rem;
             max-width: 600px;
             margin-bottom: 2rem;
-            font-weight: 600; /* En semi-gras */
+            font-weight: 600;
         }
 
         .cta-buttons {
@@ -194,12 +196,12 @@
         }
 
         .cta-button {
-            background: var(--white);
-            color: var(--dark);
+            background: var(--color-white);
+            color: var(--color-dark);
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 5px;
-            font-weight: 700; /* En gras */
+            font-weight: 700;
             cursor: pointer;
             transition: transform var(--transition-speed), background var(--transition-speed);
             text-decoration: none;
@@ -208,10 +210,38 @@
 
         .cta-button:hover {
             transform: translateY(-2px);
-            background: #e6e6e6; /* Légère variation de la couleur blanche */
+            background: var(--color-hover);
         }
 
-        /* Responsive Styles */
+        /* Styles pour le pied de page */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--color-white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Styles Responsifs */
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -239,7 +269,7 @@
             }
 
             .hero h1 img {
-                max-height: 50px; /* Ajustez selon la taille souhaitée pour les petits écrans */
+                max-height: 50px;
                 margin-right: 8px;
             }
 
@@ -252,7 +282,6 @@
                 gap: 0.5rem;
             }
 
-            /* Ajustement des comètes pour les petits écrans */
             .comet {
                 width: 40px;
                 height: 40px;
@@ -265,7 +294,7 @@
             }
 
             .hero h1 img {
-                max-height: 40px; /* Ajustez selon la taille souhaitée pour les très petits écrans */
+                max-height: 40px;
                 margin-right: 5px;
             }
 
@@ -278,7 +307,6 @@
                 font-size: 0.9rem;
             }
 
-            /* Ajustement supplémentaire des comètes pour les très petits écrans */
             .comet {
                 width: 30px;
                 height: 30px;
@@ -289,9 +317,8 @@
 <body>
     <header>
         <nav>
-            <!-- Remplacement du texte "AM Location" par une image de logo seule -->
             <a href="#" class="logo">
-                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="AM Logo">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="Logo AM Location" loading="lazy">
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#">Accueil</a>
@@ -310,12 +337,9 @@
 
     <main>
         <section class="hero">
-            <!-- Suppression de la section des étoiles -->
-            <!-- Les comètes seront générées dynamiquement via JavaScript -->
-
-            <!-- Remplacement du texte "AM Location" par une image de logo seule -->
             <h1>
-                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="AM Logo">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="Logo AM Location" loading="lazy">
+                AM Location
             </h1>
             <p>L'Excellence Automobile à votre service. Découvrez notre collection de véhicules de prestige pour tous vos besoins.</p>
             <div class="cta-buttons">
@@ -325,84 +349,102 @@
         </section>
     </main>
 
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 AM Location. Tous droits réservés.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="Twitter">TW</a>
+                <a href="#" aria-label="Instagram">IG</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Gestion du menu hamburger
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gestion du menu hamburger
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
 
-        const toggleMenu = () => {
-            const isActive = navLinks.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', isActive);
-        };
+            const toggleMenu = () => {
+                const isActive = navLinks.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isActive);
+            };
 
-        hamburger.addEventListener('click', toggleMenu);
-        hamburger.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                toggleMenu();
+            hamburger.addEventListener('click', toggleMenu);
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    toggleMenu();
+                }
+            });
+
+            // Fermeture automatique du menu après un clic sur un lien
+            const navLinksElements = navLinks.querySelectorAll('a');
+            navLinksElements.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', false);
+                });
+            });
+
+            // Gestion des transitions de page
+            const ctaButtons = document.querySelectorAll('.cta-button');
+
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 300);
+                });
+            });
+
+            // Génération Dynamique des Comètes
+            const heroSection = document.querySelector('.hero');
+            const cometImages = [
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/audi%20png@2x.png?raw=true",
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/fe3ferf915-ferrari-logo-ferrari-.png?raw=true",
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/bentley%20png.png?raw=true",
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/bmw%20picture.png?raw=true",
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/mercedes-benz-car-logo-png-brand-image-1024.png?raw=true",
+                "https://github.com/InoVex-InnoMotech/Location/blob/main/images/volkswagen-car-logo-png-brand-image-1817.png?raw=true"
+            ];
+
+            const numberOfComets = 18;
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 0; i < numberOfComets; i++) {
+                const comet = document.createElement('div');
+                comet.classList.add('comet');
+
+                const img = document.createElement('img');
+                img.src = cometImages[i % cometImages.length];
+                img.alt = getCometAlt(cometImages[i % cometImages.length]);
+                img.loading = 'lazy';
+
+                comet.appendChild(img);
+
+                comet.style.left = `${Math.random() * 100}%`;
+                comet.style.animationDelay = `${Math.random() * 5}s`;
+                comet.style.animationDuration = `${5 + Math.random() * 5}s`;
+                comet.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                fragment.appendChild(comet);
+            }
+
+            heroSection.appendChild(fragment);
+
+            function getCometAlt(url) {
+                if (url.includes("audi")) return "Audi";
+                if (url.includes("ferrari")) return "Ferrari";
+                if (url.includes("bentley")) return "Bentley";
+                if (url.includes("bmw")) return "BMW";
+                if (url.includes("mercedes-benz")) return "Mercedes-Benz";
+                return "Volkswagen";
             }
         });
-
-        // Fermeture automatique du menu après un clic sur un lien
-        const navLinksElements = document.querySelectorAll('.nav-links a');
-        navLinksElements.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', false);
-            });
-        });
-
-        // Gestion des transitions de page
-        const links = document.querySelectorAll('a[href^="entretien.html"], a[href^="location.html"]');
-
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                document.body.classList.add('fade-out');
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 300); // Durée correspondant à --transition-speed
-            });
-        });
-
-        // Génération Dynamique des Comètes
-        const heroSection = document.querySelector('.hero');
-        const cometImages = [
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/audi%20png@2x.png?raw=true",
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/fe3ferf915-ferrari-logo-ferrari-.png?raw=true",
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/bentley%20png.png?raw=true",
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/bmw%20picture.png?raw=true",
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/mercedes-benz-car-logo-png-brand-image-1024.png?raw=true",
-            "https://github.com/InoVex-InnoMotech/Location/blob/main/images/volkswagen-car-logo-png-brand-image-1817.png?raw=true"
-        ];
-
-        const numberOfComets = 18; // Total de comètes (3 Audi + 3 Ferrari + 3 Bentley + 3 BMW + 3 Mercedes-Benz + 3 Volkswagen)
-
-        for (let i = 0; i < numberOfComets; i++) {
-            const comet = document.createElement('div');
-            comet.classList.add('comet');
-
-            const img = document.createElement('img');
-            img.src = cometImages[i % cometImages.length]; // Alterne entre les images
-            img.alt = cometImages[i % cometImages.length].includes("audi") ? "Audi" :
-                      cometImages[i % cometImages.length].includes("ferrari") ? "Ferrari" :
-                      cometImages[i % cometImages.length].includes("bentley") ? "Bentley" :
-                      cometImages[i % cometImages.length].includes("bmw") ? "BMW" :
-                      cometImages[i % cometImages.length].includes("mercedes-benz") ? "Mercedes-Benz" : "Volkswagen";
-
-            comet.appendChild(img);
-
-            // Assignation aléatoire des positions et des animations
-            comet.style.left = `${Math.random() * 100}%`;
-            comet.style.animationDelay = `${Math.random() * 5}s`; // Jusqu'à 5 secondes de délai
-            comet.style.animationDuration = `${5 + Math.random() * 5}s`; // Entre 5s et 10s
-
-            // Optionnel : Rotation aléatoire
-            const rotation = Math.random() * 360;
-            comet.style.transform = `rotate(${rotation}deg)`;
-
-            heroSection.appendChild(comet);
-        }
     </script>
 </body>
 </html>
