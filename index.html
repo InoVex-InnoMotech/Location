@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM Location - L'Excellence Automobile</title>
+    <!-- Intégration de la police Inter via Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C6A355;
+            --dark: #1A1A1A;
+            --light-dark: #333;
+            --white: #FFFFFF;
+            --transition-speed: 0.3s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden; /* Empêche le défilement horizontal dû aux animations */
+            transition: opacity var(--transition-speed);
+            opacity: 1;
+        }
+
+        body.fade-out {
+            opacity: 0;
+        }
+
+        header {
+            background: rgba(0,0,0,0.9);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            top: 0;
+            left: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700; /* En gras */
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+            font-weight: 600; /* En semi-gras */
+            padding: 0.5rem 0; /* Ajout de padding pour augmenter la zone cliquable */
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px;
+            transition: all var(--transition-speed);
+        }
+
+        .hero {
+            position: relative; /* Nécessaire pour positionner les comètes */
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 60px; /* Hauteur de l'en-tête */
+            overflow: hidden; /* Masque les comètes en dehors de la section héro */
+        }
+
+        /* Styles pour les comètes */
+        .comet {
+            position: absolute;
+            top: -10%;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--gold), transparent);
+            opacity: 0.8;
+            animation: moveComet 3s linear infinite;
+        }
+
+        .comet:nth-child(1) {
+            left: 20%;
+            animation-delay: 0s;
+            animation-duration: 3s;
+        }
+
+        .comet:nth-child(2) {
+            left: 50%;
+            animation-delay: 1s;
+            animation-duration: 4s;
+        }
+
+        .comet:nth-child(3) {
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 5s;
+        }
+
+        @keyframes moveComet {
+            from {
+                top: -10%;
+                opacity: 0;
+                transform: rotate(45deg);
+            }
+            to {
+                top: 110%;
+                opacity: 0.8;
+                transform: rotate(45deg);
+            }
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1; /* Assure que le texte reste au-dessus des comètes */
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 700; /* En gras */
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-weight: 600; /* En semi-gras */
+        }
+
+        .cta-buttons {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-button {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700; /* En gras */
+            cursor: pointer;
+            transition: transform var(--transition-speed);
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: 0;
+                background: rgba(0,0,0,0.95);
+                flex-direction: column;
+                width: 200px;
+                height: calc(100% - 60px);
+                transform: translateX(100%);
+                transition: transform var(--transition-speed);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">AM Location</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#">Accueil</a>
+                <a href="#">Véhicules</a>
+                <a href="#">Services</a>
+                <a href="#">À propos</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <!-- Ajout des comètes -->
+            <div class="comet"></div>
+            <div class="comet"></div>
+            <div class="comet"></div>
+
+            <h1>AM Location</h1>
+            <p>L'Excellence Automobile à votre service. Découvrez notre collection de véhicules de prestige pour tous vos besoins.</p>
+            <div class="cta-buttons">
+                <a href="entretien.html" class="cta-button">Entretien Mécanique</a>
+                <a href="location.html" class="cta-button">Location de Voiture</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Gestion du menu hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fermeture automatique du menu après un clic sur un lien
+        const navLinksElements = document.querySelectorAll('.nav-links a');
+        navLinksElements.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Gestion des transitions de page
+        const links = document.querySelectorAll('a[href^="entretien.html"], a[href^="location.html"]');
+
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 300); // Durée correspondant à --transition-speed
+            });
+        });
+    </script>
+</body>
+</html>
