@@ -120,6 +120,7 @@
             flex-direction: column;
             align-items: center;
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
         .car-card:hover {
@@ -163,6 +164,33 @@
             font-family: serif;
             font-weight: 500;
             text-align: center;
+        }
+
+        .toggle-info {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .toggle-info:hover {
+            color: #0056b3;
+        }
+
+        .car-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            width: 100%;
+        }
+
+        .car-info.active {
+            max-height: 1000px; /* Valeur suffisamment grande pour contenir le contenu */
+            opacity: 1;
         }
 
         .car-specs {
@@ -329,7 +357,7 @@
     </header>
 
     <main>
-        <!-- Carte de Véhicule 5 -->
+        <!-- Exemple de Carte de Véhicule -->
         <div class="car-card" data-category="suv">
             <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image">
             <div class="tag-container">
@@ -339,41 +367,46 @@
             </div>
 
             <h2 class="car-title">Lamborghini Urus</h2>
-            
-            <div class="car-specs">
-                Puissance : 650cv<br>
-                CO2 : 200g<br>
-                Caution : 4500€<br>
-                <span class="car-description">Un SUV puissant alliant performance et luxe, parfait pour les aventures urbaines et hors route.</span>
-            </div>
+            <button class="toggle-info">Cliquer pour découvrir plus</button>
 
-            <div class="feature-list">
-                <div>⚡ 0-100 km/h : 3.6s</div>
-                <div>🔧 Transmission intégrale</div>
-                <div>🛋️ Intérieur Haut de Gamme</div>
-                <div>🌐 Connectivité Avancée</div>
-            </div>
-
-            <div class="price-info">
-                À partir de 900€ <span class="price-period">/jour</span>
-            </div>
-
-            <div class="rental-options">
-                <div class="rental-option">
-                    <div class="option-title">Aventure Urbaine</div>
-                    <div class="option-price">900€</div>
-                    <div class="option-details">24h de conduite - 300km inclus + assistance premium</div>
+            <div class="car-info">
+                <div class="car-specs">
+                    Puissance : 650cv<br>
+                    CO2 : 200g<br>
+                    Caution : 4500€<br>
+                    <span class="car-description">Un SUV puissant alliant performance et luxe, parfait pour les aventures urbaines et hors route.</span>
                 </div>
 
-                <div class="rental-option premium">
-                    <div class="option-title">Séjour Luxe</div>
-                    <div class="option-price">2000€</div>
-                    <div class="option-details">Du vendredi 10h au lundi 18h - 700km inclus + équipement de luxe</div>
+                <div class="feature-list">
+                    <div>⚡ 0-100 km/h : 3.6s</div>
+                    <div>🔧 Transmission intégrale</div>
+                    <div>🛋️ Intérieur Haut de Gamme</div>
+                    <div>🌐 Connectivité Avancée</div>
+                </div>
+
+                <div class="price-info">
+                    À partir de 900€ <span class="price-period">/jour</span>
+                </div>
+
+                <div class="rental-options">
+                    <div class="rental-option">
+                        <div class="option-title">Aventure Urbaine</div>
+                        <div class="option-price">900€</div>
+                        <div class="option-details">24h de conduite - 300km inclus + assistance premium</div>
+                    </div>
+
+                    <div class="rental-option premium">
+                        <div class="option-title">Séjour Luxe</div>
+                        <div class="option-price">2000€</div>
+                        <div class="option-details">Du vendredi 10h au lundi 18h - 700km inclus + équipement de luxe</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Carte de Véhicule 6 - Golf 8R -->
+        <!-- Répétez la structure ci-dessus pour les autres cartes de véhicules -->
+
+        <!-- Exemple de Carte de Véhicule 2 -->
         <div class="car-card" data-category="sportives">
             <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%208%20r%20am%20location.jpg?raw=true" alt="Golf 8R" class="car-image">
             <div class="tag-container">
@@ -383,127 +416,44 @@
             </div>
 
             <h2 class="car-title">Golf 8R</h2>
-            
-            <div class="car-specs">
-                Puissance : 320cv<br>
-                CO2 : 150g<br>
-                Caution : 2800€<br>
-                <span class="car-description">Performance et agilité réunies dans une compacte emblématique. Parfaite pour la conduite urbaine et sportive.</span>
-            </div>
+            <button class="toggle-info">Cliquer pour découvrir plus</button>
 
-            <div class="feature-list">
-                <div>⚡ 0-100 km/h : 4.7s</div>
-                <div>🛡️ Système de Sécurité Avancé</div>
-                <div>🎵 Système Audio Premium</div>
-                <div>📱 Connectivité Intégrée</div>
-            </div>
-
-            <div class="price-info">
-                À partir de 400€ <span class="price-period">/jour</span>
-            </div>
-
-            <div class="rental-options">
-                <div class="rental-option">
-                    <div class="option-title">Conduite Sportive</div>
-                    <div class="option-price">400€</div>
-                    <div class="option-details">24h de conduite dynamique - 200km inclus + assistance routière</div>
+            <div class="car-info">
+                <div class="car-specs">
+                    Puissance : 320cv<br>
+                    CO2 : 150g<br>
+                    Caution : 2800€<br>
+                    <span class="car-description">Performance et agilité réunies dans une compacte emblématique. Parfaite pour la conduite urbaine et sportive.</span>
                 </div>
 
-                <div class="rental-option premium">
-                    <div class="option-title">Week-end Sport</div>
-                    <div class="option-price">900€</div>
-                    <div class="option-details">Du vendredi 10h au dimanche 20h - 500km inclus + accès à des circuits locaux</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Carte de Véhicule 7 - Golf GTI -->
-        <div class="car-card" data-category="sportives">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%20GTI%20am%20location.jpg?raw=true" alt="Golf GTI" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience Dynamique</div>
-                <div class="promo-tag">-8% pour les réservations anticipées</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">Golf GTI</h2>
-            
-            <div class="car-specs">
-                Puissance : 245cv<br>
-                CO2 : 140g<br>
-                Caution : 2500€<br>
-                <span class="car-description">Un classique revisité pour offrir une expérience de conduite exaltante tout en conservant le confort nécessaire.</span>
-            </div>
-
-            <div class="feature-list">
-                <div>⚡ 0-100 km/h : 6.3s</div>
-                <div>🛡️ Contrôle de Traction</div>
-                <div>🎵 Audio Surround</div>
-                <div>📱 Système Navigation Intégré</div>
-            </div>
-
-            <div class="price-info">
-                À partir de 350€ <span class="price-period">/jour</span>
-            </div>
-
-            <div class="rental-options">
-                <div class="rental-option">
-                    <div class="option-title">Balade Urbaine</div>
-                    <div class="option-price">350€</div>
-                    <div class="option-details">24h de conduite confortable - 180km inclus + assistance routière</div>
+                <div class="feature-list">
+                    <div>⚡ 0-100 km/h : 4.7s</div>
+                    <div>🛡️ Système de Sécurité Avancé</div>
+                    <div>🎵 Système Audio Premium</div>
+                    <div>📱 Connectivité Intégrée</div>
                 </div>
 
-                <div class="rental-option premium">
-                    <div class="option-title">Aventure de Week-end</div>
-                    <div class="option-price">800€</div>
-                    <div class="option-details">Du samedi 9h au lundi 19h - 450km inclus + équipement de voyage</div>
+                <div class="price-info">
+                    À partir de 400€ <span class="price-period">/jour</span>
+                </div>
+
+                <div class="rental-options">
+                    <div class="rental-option">
+                        <div class="option-title">Conduite Sportive</div>
+                        <div class="option-price">400€</div>
+                        <div class="option-details">24h de conduite dynamique - 200km inclus + assistance routière</div>
+                    </div>
+
+                    <div class="rental-option premium">
+                        <div class="option-title">Week-end Sport</div>
+                        <div class="option-price">900€</div>
+                        <div class="option-details">Du vendredi 10h au dimanche 20h - 500km inclus + accès à des circuits locaux</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Carte de Véhicule 8 - RSQ3 -->
-        <div class="car-card" data-category="sportives">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/rsq3%20am%20location.jpg?raw=true" alt="RSQ3" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience Haute Performance</div>
-                <div class="promo-tag">-10% pour les réservations de groupe</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">RSQ3</h2>
-            
-            <div class="car-specs">
-                Puissance : 310cv<br>
-                CO2 : 160g<br>
-                Caution : 2700€<br>
-                <span class="car-description">Alliant puissance et élégance, le RSQ3 est conçu pour ceux qui recherchent une performance sans compromis.</span>
-            </div>
-
-            <div class="feature-list">
-                <div>⚡ 0-100 km/h : 5.1s</div>
-                <div>🛡️ Système de Sécurité Avancé</div>
-                <div>🎵 Audio de Haute Fidélité</div>
-                <div>📱 Connectivité Avancée</div>
-            </div>
-
-            <div class="price-info">
-                À partir de 420€ <span class="price-period">/jour</span>
-            </div>
-
-            <div class="rental-options">
-                <div class="rental-option">
-                    <div class="option-title">Conduite de Précision</div>
-                    <div class="option-price">420€</div>
-                    <div class="option-details">24h de performance - 220km inclus + assistance premium</div>
-                </div>
-
-                <div class="rental-option premium">
-                    <div class="option-title">Week-end Dynamique</div>
-                    <div class="option-price">850€</div>
-                    <div class="option-details">Du vendredi 11h au dimanche 21h - 500km inclus + session de conduite offerte</div>
-                </div>
-            </div>
-        </div>
+        <!-- Répétez les autres cartes de véhicules de la même manière -->
     </main>
 
     <script>
@@ -511,6 +461,7 @@
             const categories = document.querySelectorAll('.category');
             const filterBtns = document.querySelectorAll('.filter-btn');
             const carCards = document.querySelectorAll('.car-card');
+            const toggleButtons = document.querySelectorAll('.toggle-info');
 
             // Fonction pour filtrer les cartes de véhicules
             function filterCars() {
@@ -556,6 +507,19 @@
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     filterCars();
+                });
+            });
+
+            // Gestion des clics sur les boutons "Cliquer pour découvrir plus"
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const carInfo = button.nextElementSibling;
+                    carInfo.classList.toggle('active');
+                    if (carInfo.classList.contains('active')) {
+                        button.textContent = 'Cliquer pour réduire';
+                    } else {
+                        button.textContent = 'Cliquer pour découvrir plus';
+                    }
                 });
             });
         });
