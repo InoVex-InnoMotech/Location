@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM Location - Location de véhicules de luxe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 3rem; /* Ajustez la taille selon vos préférences */
+            font-weight: 600;
+            color: #FFD700; /* Couleur or */
+            font-family: serif;
+            line-height: 1.1;
+            text-align: center;
+            letter-spacing: 0.1rem; /* Espacement des lettres */
+            text-transform: uppercase; /* Texte en majuscules */
+        }
+
+        .contact-btn, .home-btn {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-btn:hover, .home-btn:hover {
+            color: #0056b3;
+        }
+
+        .categories {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1.5rem 0;
+            margin: 1rem 0;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .category {
+            color: #888;
+            text-decoration: none;
+            white-space: nowrap;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding-bottom: 0.5rem;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .category.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #222;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #007bff;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .car-card {
+            background: #111;
+            margin: 1.5rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .car-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+        }
+
+        .car-image {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-container {
+            margin-bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .experience-tag {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-tag {
+            color: #ff4444;
+            margin-bottom: 0.5rem;
+        }
+
+        .available-tag {
+            color: #4CAF50;
+        }
+
+        .car-title {
+            font-size: 2rem;
+            margin: 1.5rem 0;
+            font-family: serif;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .car-specs {
+            color: #888;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .car-description {
+            color: #666;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+            width: 100%;
+        }
+
+        .feature-list div {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .price-info {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .price-period {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .rental-options {
+            width: 100%;
+        }
+
+        .rental-option {
+            background: #191919;
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .rental-option.premium {
+            background: #1a2942;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .option-price {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .option-details {
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .car-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .car-title {
+                font-size: 1.8rem;
+            }
+
+            .feature-list div, .car-specs, .car-description {
+                font-size: 1rem;
+            }
+
+            .top-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn, .home-btn {
+                margin: 0.5rem 0 0 0;
+            }
+
+            .categories {
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .filter-options {
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .car-title {
+                font-size: 1.6rem;
+            }
+
+            .car-specs {
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-btn, .home-btn {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-header">
+            <div class="logo">AM Location</div> <!-- Modifié pour une seule ligne et couleur or -->
+            <div>
+                <a href="index.html" class="home-btn">Accueil</a>
+                <a href="#" class="contact-btn">Contacter un conseiller</a>
+            </div>
+        </div>
+
+        <div class="categories">
+            <a href="#" class="category active" data-filter="all">Tous les véhicules</a>
+            <a href="#" class="category" data-filter="sportives">Sportives</a>
+            <a href="#" class="category" data-filter="suv">SUV Premium</a>
+            <a href="#" class="category" data-filter="electriques">Électriques</a>
+            <a href="#" class="category" data-filter="collection">Collection</a>
+            <a href="#" class="category" data-filter="supercars">Supercars</a>
+        </div>
+
+        <div class="filter-options">
+            <button class="filter-btn active" data-filter="disponible">Disponible maintenant</button>
+            <button class="filter-btn" data-filter="nouveautes">Nouveautés</button>
+            <button class="filter-btn" data-filter="promotions">Promotions</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Carte de Véhicule 1 -->
+        <div class="car-card" data-category="sportives">
+            <img src="images/porsche_718_boxster.jpg" alt="Porsche 718 Boxster" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience GT</div>
+                <div class="promo-tag">-15% ce week-end</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Porsche 718 Boxster</h2>
+            
+            <div class="car-specs">
+                Puissance : 350cv<br>
+                CO2 : 0g<br>
+                Caution : 3500€<br>
+                <span class="car-description">L'essence même du roadster Porsche. Pure, racée, conçue pour les routes sinueuses.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 4.2s</div>
+                <div>🛡️ Pack Sport Chrono</div>
+                <div>🎯 Mode Sport Plus</div>
+                <div>🎵 Sound System Pro</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 590€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Escapade GT</div>
+                    <div class="option-price">590€</div>
+                    <div class="option-details">24h de pure sensation - 250km inclus + initiation circuit offerte</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Week-end Côte d'Azur</div>
+                    <div class="option-price">1490€</div>
+                    <div class="option-details">Du vendredi 16h au lundi 10h - 500km inclus + roadbook des plus belles routes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 2 -->
+        <div class="car-card" data-category="electriques">
+            <img src="images/tesla_model_s.jpg" alt="Tesla Model S" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Électrique</div>
+                <div class="promo-tag">-10% pour les réservations anticipées</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Tesla Model S</h2>
+            
+            <div class="car-specs">
+                Puissance : 670cv<br>
+                CO2 : 0g<br>
+                Caution : 4000€<br>
+                <span class="car-description">Le summum de la technologie électrique avec une autonomie exceptionnelle et des performances inégalées.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 2.5s</div>
+                <div>🔋 Autonomie : 650km</div>
+                <div>🛋️ Intérieur Luxe</div>
+                <div>📱 Système Autopilote</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 750€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Circuit Électrique</div>
+                    <div class="option-price">750€</div>
+                    <div class="option-details">24h de conduite autonome - 300km inclus + recharge rapide offerte</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Voyage Longue Distance</div>
+                    <div class="option-price">1800€</div>
+                    <div class="option-details">Du samedi 8h au dimanche 20h - 800km inclus + assistance premium</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 3 -->
+        <div class="car-card" data-category="suv">
+            <img src="images/mercedes_gls.jpg" alt="Mercedes GLS" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Luxe</div>
+                <div class="promo-tag">-20% pour les réservations de groupe</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Mercedes GLS</h2>
+            
+            <div class="car-specs">
+                Puissance : 455cv<br>
+                CO2 : 180g<br>
+                Caution : 3200€<br>
+                <span class="car-description">Le SUV par excellence alliant confort, espace et performances pour des trajets en toute sérénité.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>🛋️ Intérieur Spacieux</div>
+                <div>🔊 Système Audio Haut de Gamme</div>
+                <div>🛡️ Sécurité Avancée</div>
+                <div>🌐 Connectivité 5G</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 650€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Séjour Familial</div>
+                    <div class="option-price">650€</div>
+                    <div class="option-details">24h de confort - 400km inclus + sièges enfants gratuits</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Aventure Tout-Terrain</div>
+                    <div class="option-price">1600€</div>
+                    <div class="option-details">Du mercredi 9h au dimanche 18h - 700km inclus + équipement tout-terrain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 4 -->
+        <div class="car-card" data-category="supercars">
+            <img src="images/lamborghini_huracan.jpg" alt="Lamborghini Huracán" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Supersport</div>
+                <div class="promo-tag">-5% pour les réservations de longue durée</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Lamborghini Huracán</h2>
+            
+            <div class="car-specs">
+                Puissance : 640cv<br>
+                CO2 : 300g<br>
+                Caution : 5000€<br>
+                <span class="car-description">Une supercar italienne emblématique offrant des performances inégalées et un design audacieux.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 2.9s</div>
+                <div>🔧 Transmission intégrale</div>
+                <div>🎨 Personnalisation sur mesure</div>
+                <div>🎵 Son de Qualité Supérieure</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 1200€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Course Piste</div>
+                    <div class="option-price">1200€</div>
+                    <div class="option-details">24h de conduite intense - 400km inclus + session sur circuit offerte</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Expérience VIP</div>
+                    <div class="option-price">2500€</div>
+                    <div class="option-details">Du lundi 10h au vendredi 18h - 1000km inclus + assistance VIP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ajoutez d'autres cartes de véhicules de la même manière -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categories = document.querySelectorAll('.category');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const carCards = document.querySelectorAll('.car-card');
+
+            // Fonction pour filtrer les cartes de véhicules
+            function filterCars() {
+                const activeCategory = document.querySelector('.category.active').getAttribute('data-filter');
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+                carCards.forEach(card => {
+                    // Filtrer par catégorie
+                    let categoryMatch = (activeCategory === 'all') || (card.getAttribute('data-category') === activeCategory);
+                    
+                    // Filtrer par options
+                    let filterMatch = true;
+                    if (activeFilter === 'disponible') {
+                        filterMatch = card.querySelector('.available-tag') !== null;
+                    } else if (activeFilter === 'nouveautes') {
+                        filterMatch = card.classList.contains('nouveaute');
+                    } else if (activeFilter === 'promotions') {
+                        filterMatch = card.querySelector('.promo-tag') !== null;
+                    }
+
+                    // Afficher ou masquer la carte en fonction des filtres
+                    if (categoryMatch && filterMatch) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Gestion des clics sur les catégories
+            categories.forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    categories.forEach(c => c.classList.remove('active'));
+                    category.classList.add('active');
+                    filterCars();
+                });
+            });
+
+            // Gestion des clics sur les boutons de filtre
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterCars();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
