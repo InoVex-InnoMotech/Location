@@ -44,7 +44,7 @@
             text-transform: uppercase; /* Texte en majuscules */
         }
 
-        .contact-btn, .home-btn {
+        .home-btn {
             color: #007bff;
             text-decoration: none;
             font-size: 1.2rem;
@@ -52,7 +52,7 @@
             transition: color 0.3s;
         }
 
-        .contact-btn:hover, .home-btn:hover {
+        .home-btn:hover {
             color: #0056b3;
         }
 
@@ -267,7 +267,7 @@
                 align-items: center;
             }
 
-            .contact-btn, .home-btn {
+            .home-btn {
                 margin: 0.5rem 0 0 0;
             }
 
@@ -295,7 +295,7 @@
                 font-size: 0.9rem;
             }
 
-            .contact-btn, .home-btn {
+            .home-btn {
                 font-size: 1rem;
             }
         }
@@ -372,7 +372,183 @@
             </div>
         </div>
 
-        <!-- Autres cartes de véhicules... -->
+        <!-- Carte de Véhicule 2 -->
+        <div class="car-card" data-category="electriques">
+            <img src="images/tesla_model_s.jpg" alt="Tesla Model S" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Électrique</div>
+                <div class="promo-tag">-10% pour les réservations anticipées</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Tesla Model S</h2>
+            
+            <div class="car-specs">
+                Puissance : 670cv<br>
+                CO2 : 0g<br>
+                Caution : 4000€<br>
+                <span class="car-description">Le summum de la technologie électrique avec une autonomie exceptionnelle et des performances inégalées.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 2.5s</div>
+                <div>🔋 Autonomie : 650km</div>
+                <div>🛋️ Intérieur Luxe</div>
+                <div>📱 Système Autopilote</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 750€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Circuit Électrique</div>
+                    <div class="option-price">750€</div>
+                    <div class="option-details">24h de conduite autonome - 300km inclus + recharge rapide offerte</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Voyage Longue Distance</div>
+                    <div class="option-price">1800€</div>
+                    <div class="option-details">Du samedi 8h au dimanche 20h - 800km inclus + assistance premium</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 3 -->
+        <div class="car-card" data-category="suv">
+            <img src="images/mercedes_gls.jpg" alt="Mercedes GLS" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Luxe</div>
+                <div class="promo-tag">-20% pour les réservations de groupe</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Mercedes GLS</h2>
+            
+            <div class="car-specs">
+                Puissance : 455cv<br>
+                CO2 : 180g<br>
+                Caution : 3200€<br>
+                <span class="car-description">Le SUV par excellence alliant confort, espace et performances pour des trajets en toute sérénité.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>🛋️ Intérieur Spacieux</div>
+                <div>🔊 Système Audio Haut de Gamme</div>
+                <div>🛡️ Sécurité Avancée</div>
+                <div>🌐 Connectivité 5G</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 650€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Séjour Familial</div>
+                    <div class="option-price">650€</div>
+                    <div class="option-details">24h de confort - 400km inclus + sièges enfants gratuits</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Aventure Tout-Terrain</div>
+                    <div class="option-price">1600€</div>
+                    <div class="option-details">Du mercredi 9h au dimanche 18h - 700km inclus + équipement tout-terrain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 4 - Lamborghini Huracán (Déplacée dans la catégorie SUV) -->
+        <div class="car-card" data-category="suv">
+            <img src="images/votre_image_lamborghini.jpg" alt="Lamborghini Huracán" class="car-image"> <!-- Mettez à jour le chemin de l'image -->
+            <div class="tag-container">
+                <div class="experience-tag">Expérience Supersport</div>
+                <div class="promo-tag">-5% pour les réservations de longue durée</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Lamborghini Huracán</h2>
+            
+            <div class="car-specs">
+                Puissance : 640cv<br>
+                CO2 : 300g<br>
+                Caution : 5000€<br>
+                <span class="car-description">Une supercar italienne emblématique offrant des performances inégalées et un design audacieux.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 2.9s</div>
+                <div>🔧 Transmission intégrale</div>
+                <div>🎨 Personnalisation sur mesure</div>
+                <div>🎵 Son de Qualité Supérieure</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 1200€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Course Piste</div>
+                    <div class="option-price">1200€</div>
+                    <div class="option-details">24h de conduite intense - 400km inclus + session sur circuit offerte</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Expérience VIP</div>
+                    <div class="option-price">2500€</div>
+                    <div class="option-details">Du lundi 10h au vendredi 18h - 1000km inclus + assistance VIP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de Véhicule 5 - Lamborghini Urus -->
+        <div class="car-card" data-category="suv">
+            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image">
+            <div class="tag-container">
+                <div class="experience-tag">Expérience SUV</div>
+                <div class="promo-tag">-10% pour les réservations de fin de semaine</div>
+                <div class="available-tag">Disponible maintenant</div>
+            </div>
+
+            <h2 class="car-title">Lamborghini Urus</h2>
+            
+            <div class="car-specs">
+                Puissance : 650cv<br>
+                CO2 : 200g<br>
+                Caution : 4500€<br>
+                <span class="car-description">Un SUV puissant alliant performance et luxe, parfait pour les aventures urbaines et hors route.</span>
+            </div>
+
+            <div class="feature-list">
+                <div>⚡ 0-100 km/h : 3.6s</div>
+                <div>🔧 Transmission intégrale</div>
+                <div>🛋️ Intérieur Haut de Gamme</div>
+                <div>🌐 Connectivité Avancée</div>
+            </div>
+
+            <div class="price-info">
+                À partir de 900€ <span class="price-period">/jour</span>
+            </div>
+
+            <div class="rental-options">
+                <div class="rental-option">
+                    <div class="option-title">Aventure Urbaine</div>
+                    <div class="option-price">900€</div>
+                    <div class="option-details">24h de conduite - 300km inclus + assistance premium</div>
+                </div>
+
+                <div class="rental-option premium">
+                    <div class="option-title">Séjour Luxe</div>
+                    <div class="option-price">2000€</div>
+                    <div class="option-details">Du vendredi 10h au lundi 18h - 700km inclus + équipement de luxe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ajoutez d'autres cartes de véhicules de la même manière -->
     </main>
 
     <script>
