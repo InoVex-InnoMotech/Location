@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Métadonnées et titre -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AM Location - Location de véhicules de luxe</title>
+    <!-- Styles CSS -->
     <style>
+        /* Variables CSS pour une maintenance facilitée */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --background-color: #000;
+            --text-color: #fff;
+            --accent-color: #FFD700; /* Or */
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Réinitialisation des marges et paddings */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-family);
         }
 
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
 
-        .header {
+        header.header {
             padding: 2rem 1.5rem;
             border-bottom: 1px solid #222;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .top-header {
-            width: 100%;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             margin-bottom: 1rem;
         }
 
         .logo {
-            font-size: 3rem; /* Ajustez la taille selon vos préférences */
+            font-size: 3rem;
             font-weight: 600;
-            color: #FFD700; /* Couleur or */
+            color: var(--accent-color);
             font-family: serif;
             line-height: 1.1;
             text-align: center;
-            letter-spacing: 0.1rem; /* Espacement des lettres */
-            text-transform: uppercase; /* Texte en majuscules */
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+        }
+
+        nav {
+            margin-top: 1rem;
         }
 
         .home-btn {
-            color: #007bff;
+            color: var(--primary-color);
             text-decoration: none;
             font-size: 1.2rem;
-            margin-left: 1rem;
             transition: color 0.3s;
         }
 
         .home-btn:hover {
-            color: #0056b3;
+            color: var(--secondary-color);
         }
 
         .categories {
@@ -62,7 +74,6 @@
             overflow-x: auto;
             padding: 1.5rem 0;
             margin: 1rem 0;
-            width: 100%;
             justify-content: center;
         }
 
@@ -77,8 +88,8 @@
         }
 
         .category.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
         }
 
         .filter-options {
@@ -100,7 +111,7 @@
         }
 
         .filter-btn.active {
-            background: #007bff;
+            background: var(--primary-color);
         }
 
         main {
@@ -169,7 +180,7 @@
         .toggle-info {
             background: none;
             border: none;
-            color: #007bff;
+            color: var(--primary-color);
             cursor: pointer;
             font-size: 1rem;
             margin-bottom: 1rem;
@@ -177,19 +188,19 @@
         }
 
         .toggle-info:hover {
-            color: #0056b3;
+            color: var(--secondary-color);
         }
 
         .car-info {
-            max-height: 0;
+            height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
+            transition: height 0.5s ease, opacity 0.5s ease;
             opacity: 0;
             width: 100%;
         }
 
         .car-info.active {
-            max-height: 1000px; /* Valeur suffisamment grande pour contenir le contenu */
+            height: auto;
             opacity: 1;
         }
 
@@ -272,7 +283,8 @@
             display: none;
         }
 
-        @media (max-width: 768px) {
+        /* Responsive Design */
+        @media (max-width: 48em) { /* 768px */
             .car-card {
                 width: 100%;
                 max-width: 400px;
@@ -290,15 +302,6 @@
                 font-size: 1rem;
             }
 
-            .top-header {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .home-btn {
-                margin: 0.5rem 0 0 0;
-            }
-
             .categories {
                 gap: 1rem;
                 padding: 1rem 0;
@@ -309,7 +312,7 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 30em) { /* 480px */
             .car-title {
                 font-size: 1.6rem;
             }
@@ -330,25 +333,24 @@
     </style>
 </head>
 <body>
+    <!-- En-tête avec logo et navigation -->
     <header class="header">
         <div class="top-header">
-            <div class="logo">AM Location</div> <!-- Modifié pour une seule ligne et couleur or -->
-            <div>
+            <div class="logo">AM Location</div>
+            <nav>
                 <a href="index.html" class="home-btn">Accueil</a>
-                <a href="index.html" class="home-btn">Retour à l'accueil</a> <!-- Nouveau bouton ajouté -->
-            </div>
+            </nav>
         </div>
 
+        <!-- Catégories de véhicules -->
         <div class="categories">
             <a href="#" class="category active" data-filter="all">Tous les véhicules</a>
             <a href="#" class="category" data-filter="sportives">Sportives</a>
             <a href="#" class="category" data-filter="suv">SUV Premium</a>
-            <a href="#" class="category" data-filter="electriques">Électriques</a>
-            <a href="#" class="category" data-filter="collection">Collection</a>
-            <a href="#" class="category" data-filter="supercars">Supercars</a>
-            <!-- La catégorie 'golf' a été supprimée -->
+            <!-- Les catégories sans véhicules ont été retirées pour le moment -->
         </div>
 
+        <!-- Options de filtrage -->
         <div class="filter-options">
             <button class="filter-btn active" data-filter="disponible">Disponible maintenant</button>
             <button class="filter-btn" data-filter="nouveautes">Nouveautés</button>
@@ -356,9 +358,10 @@
         </div>
     </header>
 
+    <!-- Contenu principal avec les cartes de véhicules -->
     <main>
         <!-- Carte de Véhicule 1 - Lamborghini Urus -->
-        <div class="car-card" data-category="suv">
+        <div class="car-card nouveaute" data-category="suv">
             <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image">
             <div class="tag-container">
                 <div class="experience-tag">Expérience SUV</div>
@@ -367,7 +370,7 @@
             </div>
 
             <h2 class="car-title">Lamborghini Urus</h2>
-            <button class="toggle-info">Cliquer pour découvrir plus</button>
+            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
 
             <div class="car-info">
                 <div class="car-specs">
@@ -414,7 +417,7 @@
             </div>
 
             <h2 class="car-title">Golf 8R</h2>
-            <button class="toggle-info">Cliquer pour découvrir plus</button>
+            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
 
             <div class="car-info">
                 <div class="car-specs">
@@ -452,7 +455,7 @@
         </div>
 
         <!-- Carte de Véhicule 3 - Golf GTI -->
-        <div class="car-card" data-category="sportives">
+        <div class="car-card nouveaute" data-category="sportives">
             <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%20GTI%20am%20location.jpg?raw=true" alt="Golf GTI" class="car-image">
             <div class="tag-container">
                 <div class="experience-tag">Expérience Dynamique</div>
@@ -461,7 +464,7 @@
             </div>
 
             <h2 class="car-title">Golf GTI</h2>
-            <button class="toggle-info">Cliquer pour découvrir plus</button>
+            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
 
             <div class="car-info">
                 <div class="car-specs">
@@ -508,7 +511,7 @@
             </div>
 
             <h2 class="car-title">RSQ3</h2>
-            <button class="toggle-info">Cliquer pour découvrir plus</button>
+            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
 
             <div class="car-info">
                 <div class="car-specs">
@@ -544,10 +547,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- Ajoutez d'autres cartes de véhicules ici en suivant la même structure -->
     </main>
 
+    <!-- Scripts JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const categories = document.querySelectorAll('.category');
@@ -557,30 +559,35 @@
 
             // Fonction pour filtrer les cartes de véhicules
             function filterCars() {
-                const activeCategory = document.querySelector('.category.active').getAttribute('data-filter');
-                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                const activeCategoryElement = document.querySelector('.category.active');
+                const activeFilterElement = document.querySelector('.filter-btn.active');
 
-                carCards.forEach(card => {
-                    // Filtrer par catégorie
-                    let categoryMatch = (activeCategory === 'all') || (card.getAttribute('data-category') === activeCategory);
-                    
-                    // Filtrer par options
-                    let filterMatch = true;
-                    if (activeFilter === 'disponible') {
-                        filterMatch = card.querySelector('.available-tag') !== null;
-                    } else if (activeFilter === 'nouveautes') {
-                        filterMatch = card.classList.contains('nouveaute');
-                    } else if (activeFilter === 'promotions') {
-                        filterMatch = card.querySelector('.promo-tag') !== null;
-                    }
+                if (activeCategoryElement && activeFilterElement) {
+                    const activeCategory = activeCategoryElement.getAttribute('data-filter');
+                    const activeFilter = activeFilterElement.getAttribute('data-filter');
 
-                    // Afficher ou masquer la carte en fonction des filtres
-                    if (categoryMatch && filterMatch) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                    carCards.forEach(card => {
+                        // Filtrer par catégorie
+                        let categoryMatch = (activeCategory === 'all') || (card.getAttribute('data-category') === activeCategory);
+                        
+                        // Filtrer par options
+                        let filterMatch = true;
+                        if (activeFilter === 'disponible') {
+                            filterMatch = card.querySelector('.available-tag') !== null;
+                        } else if (activeFilter === 'nouveautes') {
+                            filterMatch = card.classList.contains('nouveaute');
+                        } else if (activeFilter === 'promotions') {
+                            filterMatch = card.querySelector('.promo-tag') !== null;
+                        }
+
+                        // Afficher ou masquer la carte en fonction des filtres
+                        if (categoryMatch && filterMatch) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                }
             }
 
             // Gestion des clics sur les catégories
@@ -607,11 +614,9 @@
                 button.addEventListener('click', () => {
                     const carInfo = button.nextElementSibling;
                     carInfo.classList.toggle('active');
-                    if (carInfo.classList.contains('active')) {
-                        button.textContent = 'Cliquer pour réduire';
-                    } else {
-                        button.textContent = 'Cliquer pour découvrir plus';
-                    }
+                    const expanded = carInfo.classList.contains('active');
+                    button.textContent = expanded ? 'Cliquer pour réduire' : 'Cliquer pour découvrir plus';
+                    button.setAttribute('aria-expanded', expanded);
                 });
             });
         });
