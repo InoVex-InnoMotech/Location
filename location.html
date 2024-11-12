@@ -43,14 +43,15 @@
         }
 
         .logo {
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--accent-color);
+            font-size: 2rem; /* Taille réduite */
+            font-weight: 500; /* Moins épais */
+            color: #fff; /* Couleur moins voyante */
             font-family: serif;
             line-height: 1.1;
             text-align: center;
-            letter-spacing: 0.1rem;
+            letter-spacing: 0.05rem;
             text-transform: uppercase;
+            text-decoration: none; /* Pas de soulignement */
         }
 
         nav {
@@ -291,7 +292,7 @@
             }
 
             .logo {
-                font-size: 2.5rem;
+                font-size: 1.8rem; /* Taille ajustée pour mobile */
             }
 
             .car-title {
@@ -336,9 +337,11 @@
     <!-- En-tête avec logo et navigation -->
     <header class="header">
         <div class="top-header">
-            <div class="logo">AM Location</div>
+            <!-- Logo transformé en lien -->
+            <a href="index.html" class="logo">AM Location</a>
+            <!-- Bouton "Retour à l'accueil" -->
             <nav>
-                <a href="index.html" class="home-btn">Accueil</a>
+                <a href="index.html" class="home-btn">Retour à l'accueil</a>
             </nav>
         </div>
 
@@ -347,7 +350,9 @@
             <a href="#" class="category active" data-filter="all">Tous les véhicules</a>
             <a href="#" class="category" data-filter="sportives">Sportives</a>
             <a href="#" class="category" data-filter="suv">SUV Premium</a>
-            <!-- Les catégories sans véhicules ont été retirées pour le moment -->
+            <a href="#" class="category" data-filter="electrique">Électrique</a>
+            <a href="#" class="category" data-filter="collection">Collection</a>
+            <a href="#" class="category" data-filter="supercar">Supercar</a>
         </div>
 
         <!-- Options de filtrage -->
@@ -569,7 +574,7 @@
                     carCards.forEach(card => {
                         // Filtrer par catégorie
                         let categoryMatch = (activeCategory === 'all') || (card.getAttribute('data-category') === activeCategory);
-                        
+
                         // Filtrer par options
                         let filterMatch = true;
                         if (activeFilter === 'disponible') {
