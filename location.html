@@ -5,19 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AM Location - Location de véhicules de luxe</title>
-    <!-- Styles CSS -->
+    <!-- Intégration de la police Inter via Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS pour une maintenance facilitée */
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #0056b3;
-            --background-color: #000;
-            --text-color: #fff;
-            --accent-color: #FFD700; /* Or */
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            /* Couleurs */
+            --color-white: #FFFFFF;
+            --color-dark: #1A1A1A;
+            --color-light-dark: #333333;
+            --color-primary: #007bff;
+            --color-primary-hover: #0056b3;
+            --color-hover: #e6e6e6;
+
+            /* Dimensions */
+            --transition-speed: 0.3s;
+            --animation-speed: 0.5s;
+            --max-width: 1200px;
+            --header-height: 60px;
+
+            /* Typographie */
+            --font-family: 'Inter', sans-serif;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-xxl: 2rem;
         }
 
-        /* Réinitialisation des marges et paddings */
         * {
             margin: 0;
             padding: 0;
@@ -26,47 +39,101 @@
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: opacity var(--transition-speed);
+            opacity: 1;
+            font-size: var(--font-size-base);
         }
 
-        header.header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid #222;
+        body.fade-out {
+            opacity: 0;
         }
 
-        .top-header {
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            height: var(--header-height);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .logo {
-            font-size: 2rem; /* Taille réduite */
-            font-weight: 500; /* Moins épais */
-            color: #fff; /* Couleur moins voyante */
-            /* Suppression de font-family: serif; */
-            line-height: 1.1;
-            text-align: center;
-            letter-spacing: 0.05rem;
-            text-transform: uppercase;
-            text-decoration: none; /* Pas de soulignement */
+            padding: 0 1rem;
         }
 
         nav {
-            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
         }
 
-        .home-btn {
-            color: var(--primary-color);
+        .logo img {
+            max-height: 40px;
+            width: auto;
+            margin-right: 10px;
+            display: block; /* Assure que l'image est bien affichée */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            transition: transform var(--transition-speed);
+        }
+
+        .nav-links a {
+            color: var(--color-white);
             text-decoration: none;
-            font-size: 1.2rem;
-            transition: color 0.3s;
+            transition: color var(--transition-speed);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
         }
 
-        .home-btn:hover {
-            color: var(--secondary-color);
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--color-white);
+            transition: width var(--transition-speed);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background: var(--color-white);
+            transition: all var(--transition-speed);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: calc(var(--header-height) + 2rem); /* Ajustement pour éviter le chevauchement */
         }
 
         .categories {
@@ -89,22 +156,20 @@
         }
 
         .category.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
         }
 
-        /* Modification de .filter-options */
         .filter-options {
             display: flex;
             gap: 1rem;
-            /* Permettre le défilement horizontal */
             flex-wrap: nowrap;
             overflow-x: auto;
             padding-bottom: 1rem;
             justify-content: center;
+            position: relative;
         }
 
-        /* Cacher les barres de défilement sur les principaux navigateurs */
         .filter-options::-webkit-scrollbar {
             display: none;
         }
@@ -122,12 +187,50 @@
             color: #fff;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
-            flex: 0 0 auto; /* Empêche les boutons de s'étirer */
+            transition: background var(--transition-speed), transform var(--animation-speed);
+            flex: 0 0 auto;
         }
 
         .filter-btn.active {
-            background: var(--primary-color);
+            background: var(--color-primary);
+            transform: translateX(0);
+        }
+
+        /* Animation pour les filtres */
+        .filter-btn.slide-in-left {
+            animation: slideInLeft var(--animation-speed) forwards;
+        }
+
+        .filter-btn.slide-out-left {
+            animation: slideOutLeft var(--animation-speed) forwards;
+        }
+
+        .filter-btn.slide-in-right {
+            animation: slideInRight var(--animation-speed) forwards;
+        }
+
+        .filter-btn.slide-out-right {
+            animation: slideOutRight var(--animation-speed) forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
 
         main {
@@ -135,19 +238,34 @@
             flex-wrap: wrap;
             justify-content: center;
             padding: 2rem;
+            transition: all var(--transition-speed);
         }
 
         .car-card {
             background: #111;
-            margin: 1.5rem;
+            margin: 1rem;
             padding: 2rem;
             border-radius: 1rem;
-            width: 300px;
+            width: 100%;
+            max-width: 300px; /* Limite la largeur pour éviter des cartes trop larges */
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, opacity var(--animation-speed), transform var(--animation-speed);
             position: relative;
+            opacity: 1;
+        }
+
+        .car-card.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity var(--animation-speed), transform var(--animation-speed);
+        }
+
+        .car-card.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity var(--animation-speed), transform var(--animation-speed);
         }
 
         .car-card:hover {
@@ -188,7 +306,6 @@
         .car-title {
             font-size: 2rem;
             margin: 1.5rem 0;
-            /* Suppression de font-family: serif; */
             font-weight: 500;
             text-align: center;
         }
@@ -196,7 +313,7 @@
         .toggle-info {
             background: none;
             border: none;
-            color: var(--primary-color);
+            color: var(--color-primary);
             cursor: pointer;
             font-size: 1rem;
             margin-bottom: 1rem;
@@ -204,7 +321,7 @@
         }
 
         .toggle-info:hover {
-            color: var(--secondary-color);
+            color: var(--color-primary-hover);
         }
 
         .car-info {
@@ -299,23 +416,82 @@
             display: none;
         }
 
-        /* Responsive Design */
-        @media (max-width: 48em) { /* 768px */
-            .car-card {
-                width: 100%;
-                max-width: 400px;
-            }
+        /* Styles pour le pied de page */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--color-white);
+            padding: 1rem;
+            text-align: center;
+        }
 
-            .logo {
-                font-size: 1.8rem; /* Taille ajustée pour mobile */
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signature {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Styles Responsifs */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 1.5rem;
             }
 
             .car-title {
                 font-size: 1.8rem;
             }
 
-            .feature-list div, .car-specs, .car-description {
-                font-size: 1rem;
+            .filter-btn {
+                padding: 0.9rem 1.8rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--header-height);
+                right: 0;
+                background: rgba(0,0,0,0.95);
+                flex-direction: column;
+                width: 250px;
+                height: calc(100% - var(--header-height));
+                transform: translateX(100%);
+                transition: transform var(--transition-speed);
+                padding-top: 2rem;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .car-card {
+                width: 100%;
+                max-width: 400px;
             }
 
             .categories {
@@ -326,15 +502,23 @@
             .filter-options {
                 gap: 0.5rem;
             }
+
+            .logo img {
+                max-height: 35px; /* Ajustement de la taille du logo pour mobile */
+            }
         }
 
-        @media (max-width: 30em) { /* 480px */
-            .car-title {
-                font-size: 1.6rem;
+        @media (max-width: 480px) {
+            header {
+                padding: 0 0.5rem;
             }
 
-            .car-specs {
-                font-size: 1rem;
+            .nav-links {
+                width: 200px;
+            }
+
+            .car-title {
+                font-size: 1.6rem;
             }
 
             .filter-btn {
@@ -345,21 +529,46 @@
             .home-btn {
                 font-size: 1rem;
             }
+
+            .car-specs {
+                font-size: 1rem;
+            }
+        }
+
+        /* Accessibilité améliorée */
+        a:focus,
+        button:focus,
+        .hamburger:focus {
+            outline: 2px dashed var(--color-primary);
+            outline-offset: 4px;
         }
     </style>
 </head>
 <body>
     <!-- En-tête avec logo et navigation -->
-    <header class="header">
-        <div class="top-header">
-            <!-- Logo transformé en lien -->
-            <a href="index.html" class="logo">AM Location</a>
-            <!-- Bouton "Retour à l'accueil" -->
-            <nav>
-                <a href="index.html" class="home-btn">Retour à l'accueil</a>
-            </nav>
-        </div>
+    <header>
+        <nav>
+            <a href="index.html" class="logo" aria-label="Accueil">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="Logo AM Location" loading="lazy">
+            </a>
+            <div class="nav-links" id="navLinks" role="menu">
+                <a href="index.html" role="menuitem">Accueil</a>
+                <a href="#" role="menuitem">Véhicules</a>
+                <a href="#" role="menuitem">Services</a>
+                <a href="entretien.html" role="menuitem">Entretien Mécanique</a>
+                <a href="#" role="menuitem">À propos</a>
+                <a href="#" role="menuitem">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger" aria-label="Menu de navigation" aria-expanded="false" role="button" tabindex="0">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Contenu principal avec les cartes de véhicules -->
+    <div class="container">
         <!-- Catégories de véhicules -->
         <div class="categories">
             <a href="#" class="category active" data-filter="all">Tous les véhicules</a>
@@ -376,10 +585,7 @@
             <button class="filter-btn" data-filter="nouveautes">Nouveautés</button>
             <button class="filter-btn" data-filter="promotions">Promotions</button>
         </div>
-    </header>
 
-    <!-- Contenu principal avec les cartes de véhicules -->
-    <main>
         <!-- Carte de Véhicule 1 - Lamborghini Urus -->
         <div class="car-card nouveaute" data-category="suv">
             <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image">
@@ -567,17 +773,77 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 AM Location. Tous droits réservés.</p>
+            <div class="signature">
+                Créé et conçu par InoVex
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gestion du menu hamburger
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            const toggleMenu = () => {
+                const isActive = navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isActive);
+            };
+
+            hamburger.addEventListener('click', toggleMenu);
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    toggleMenu();
+                }
+            });
+
+            // Fermeture automatique du menu après un clic sur un lien
+            const navLinksElements = navLinks.querySelectorAll('a');
+            navLinksElements.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', false);
+                    }
+                });
+            });
+
+            // Gestion des transitions de page
+            const ctaButtons = document.querySelectorAll('.cta-button');
+
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith("#")) {
+                        // Scroll vers l'ancre
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        // Transition de page
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    }
+                });
+            });
+
+            // Gestion des filtres de véhicules
             const categories = document.querySelectorAll('.category');
             const filterBtns = document.querySelectorAll('.filter-btn');
             const carCards = document.querySelectorAll('.car-card');
             const toggleButtons = document.querySelectorAll('.toggle-info');
 
-            // Fonction pour filtrer les cartes de véhicules
             function filterCars() {
                 const activeCategoryElement = document.querySelector('.category.active');
                 const activeFilterElement = document.querySelector('.filter-btn.active');
@@ -600,10 +866,12 @@
                             filterMatch = card.querySelector('.promo-tag') !== null;
                         }
 
-                        // Afficher ou masquer la carte en fonction des filtres
+                        // Afficher ou masquer la carte en fonction des filtres avec animation
                         if (categoryMatch && filterMatch) {
                             card.classList.remove('hidden');
+                            card.classList.add('show');
                         } else {
+                            card.classList.remove('show');
                             card.classList.add('hidden');
                         }
                     });
@@ -620,11 +888,41 @@
                 });
             });
 
-            // Gestion des clics sur les boutons de filtre
+            // Gestion des clics sur les boutons de filtre avec effet de glissement
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Détermine la direction du slide
+                    const previousActive = document.querySelector('.filter-btn.active');
+                    let direction = 'right';
+                    if (btn === previousActive.nextElementSibling) {
+                        direction = 'left';
+                    }
+
+                    // Animer le bouton précédent
+                    if (previousActive) {
+                        previousActive.classList.remove('active');
+                        if (direction === 'left') {
+                            previousActive.classList.add('slide-out-left');
+                        } else {
+                            previousActive.classList.add('slide-out-right');
+                        }
+                        previousActive.addEventListener('animationend', () => {
+                            previousActive.classList.remove('slide-out-left', 'slide-out-right');
+                        }, { once: true });
+                    }
+
+                    // Animer le bouton cliqué
                     btn.classList.add('active');
+                    if (direction === 'left') {
+                        btn.classList.add('slide-in-left');
+                    } else {
+                        btn.classList.add('slide-in-right');
+                    }
+                    btn.addEventListener('animationend', () => {
+                        btn.classList.remove('slide-in-left', 'slide-in-right');
+                    }, { once: true });
+
+                    // Appliquer le filtre
                     filterCars();
                 });
             });
