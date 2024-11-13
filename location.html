@@ -145,10 +145,18 @@
         .categories {
             display: flex;
             gap: 2rem;
+            flex-wrap: nowrap;
             overflow-x: auto;
             padding: 1.5rem 0;
             margin: 1rem 0;
-            justify-content: center;
+            justify-content: flex-start;
+            width: 100%;
+            -ms-overflow-style: none;  /* Cacher la barre de défilement IE et Edge */
+            scrollbar-width: none;     /* Cacher la barre de défilement Firefox */
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none; /* Cacher la barre de défilement Chrome, Safari et Opera */
         }
 
         .category {
@@ -490,6 +498,7 @@
             .categories {
                 gap: 1rem;
                 padding: 1rem 0;
+                width: 100%;
             }
 
             .filter-options {
