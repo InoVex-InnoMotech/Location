@@ -78,11 +78,13 @@
             max-height: 40px;
             width: auto;
             margin-right: 10px;
-            display: block; /* Assure que l'image est bien affichée */
+            display: block;
         }
 
         .nav-links {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 2rem;
             transition: transform var(--transition-speed);
         }
@@ -120,6 +122,10 @@
             width: 30px;
             height: 25px;
             justify-content: space-between;
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
         }
 
         .hamburger div {
@@ -133,7 +139,7 @@
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 2rem;
-            margin-top: calc(var(--header-height) + 2rem); /* Ajustement pour éviter le chevauchement */
+            margin-top: calc(var(--header-height) + 2rem);
         }
 
         .categories {
@@ -146,13 +152,16 @@
         }
 
         .category {
+            background: none;
             color: #888;
+            border: none;
             text-decoration: none;
             white-space: nowrap;
             font-size: 1.1rem;
             cursor: pointer;
-            padding-bottom: 0.5rem;
-            transition: color 0.3s, border-bottom 0.3s;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-bottom 0.3s, background 0.3s;
         }
 
         .category.active {
@@ -167,16 +176,14 @@
             overflow-x: auto;
             padding-bottom: 1rem;
             justify-content: center;
-            position: relative;
+            margin-bottom: 2rem;
+            width: 100%;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .filter-options::-webkit-scrollbar {
             display: none;
-        }
-
-        .filter-options {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
         }
 
         .filter-btn {
@@ -187,67 +194,48 @@
             color: #fff;
             font-size: 1rem;
             cursor: pointer;
-            transition: background var(--transition-speed), transform var(--animation-speed);
+            transition: background var(--transition-speed), opacity var(--transition-speed);
             flex: 0 0 auto;
+            outline: none;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover,
+        .filter-btn:focus {
+            background: var(--color-primary-hover);
         }
 
         .filter-btn.active {
             background: var(--color-primary);
-            transform: translateX(0);
+            opacity: 1;
         }
 
-        /* Animation pour les filtres */
-        .filter-btn.slide-in-left {
-            animation: slideInLeft var(--animation-speed) forwards;
-        }
-
-        .filter-btn.slide-out-left {
-            animation: slideOutLeft var(--animation-speed) forwards;
-        }
-
-        .filter-btn.slide-in-right {
-            animation: slideInRight var(--animation-speed) forwards;
-        }
-
-        .filter-btn.slide-out-right {
-            animation: slideOutRight var(--animation-speed) forwards;
-        }
-
-        @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOutLeft {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(-100%); opacity: 0; }
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
+        .filter-btn:not(.active) {
+            opacity: 0.8;
         }
 
         main {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             padding: 2rem;
             transition: all var(--transition-speed);
         }
 
+        .car-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+        }
+
         .car-card {
             background: #111;
-            margin: 1rem;
             padding: 2rem;
             border-radius: 1rem;
             width: 100%;
-            max-width: 300px; /* Limite la largeur pour éviter des cartes trop larges */
+            max-width: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -320,7 +308,8 @@
             transition: color 0.3s;
         }
 
-        .toggle-info:hover {
+        .toggle-info:hover,
+        .toggle-info:focus {
             color: var(--color-primary-hover);
         }
 
@@ -489,6 +478,10 @@
                 transform: rotate(-45deg) translate(5px, -5px);
             }
 
+            main {
+                padding: 1rem;
+            }
+
             .car-card {
                 width: 100%;
                 max-width: 400px;
@@ -504,7 +497,7 @@
             }
 
             .logo img {
-                max-height: 35px; /* Ajustement de la taille du logo pour mobile */
+                max-height: 35px;
             }
         }
 
@@ -524,10 +517,6 @@
             .filter-btn {
                 padding: 0.6rem 1.5rem;
                 font-size: 0.9rem;
-            }
-
-            .home-btn {
-                font-size: 1rem;
             }
 
             .car-specs {
@@ -551,7 +540,7 @@
             <a href="index.html" class="logo" aria-label="Accueil">
                 <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="Logo AM Location" loading="lazy">
             </a>
-            <div class="nav-links" id="navLinks" role="menu">
+            <div class="nav-links" id="navLinks" role="menu" aria-label="Navigation principale">
                 <a href="index.html" role="menuitem">Accueil</a>
                 <a href="#" role="menuitem">Véhicules</a>
                 <a href="#" role="menuitem">Services</a>
@@ -559,221 +548,224 @@
                 <a href="#" role="menuitem">À propos</a>
                 <a href="#" role="menuitem">Contact</a>
             </div>
-            <div class="hamburger" id="hamburger" aria-label="Menu de navigation" aria-expanded="false" role="button" tabindex="0">
+            <button class="hamburger" id="hamburger" aria-label="Menu de navigation" aria-expanded="false" aria-controls="navLinks" role="button">
                 <div></div>
                 <div></div>
                 <div></div>
-            </div>
+            </button>
         </nav>
     </header>
 
     <!-- Contenu principal avec les cartes de véhicules -->
-    <div class="container">
+    <main class="container">
         <!-- Catégories de véhicules -->
-        <div class="categories">
-            <a href="#" class="category active" data-filter="all">Tous les véhicules</a>
-            <a href="#" class="category" data-filter="sportives">Sportives</a>
-            <a href="#" class="category" data-filter="suv">SUV Premium</a>
-            <a href="#" class="category" data-filter="electrique">Électrique</a>
-            <a href="#" class="category" data-filter="collection">Collection</a>
-            <a href="#" class="category" data-filter="supercar">Supercar</a>
+        <div class="categories" role="tablist" aria-label="Catégories de véhicules">
+            <button class="category active" data-filter="all" role="tab" aria-selected="true">Tous les véhicules</button>
+            <button class="category" data-filter="sportives" role="tab" aria-selected="false">Sportives</button>
+            <button class="category" data-filter="suv" role="tab" aria-selected="false">SUV Premium</button>
+            <button class="category" data-filter="electrique" role="tab" aria-selected="false">Électrique</button>
+            <button class="category" data-filter="collection" role="tab" aria-selected="false">Collection</button>
+            <button class="category" data-filter="supercar" role="tab" aria-selected="false">Supercar</button>
         </div>
 
         <!-- Options de filtrage -->
-        <div class="filter-options">
-            <button class="filter-btn active" data-filter="disponible">Disponible maintenant</button>
-            <button class="filter-btn" data-filter="nouveautes">Nouveautés</button>
-            <button class="filter-btn" data-filter="promotions">Promotions</button>
+        <div class="filter-options" role="group" aria-label="Options de filtrage">
+            <button class="filter-btn active" data-filter="disponible" aria-pressed="true">Disponible maintenant</button>
+            <button class="filter-btn" data-filter="nouveautes" aria-pressed="false">Nouveautés</button>
+            <button class="filter-btn" data-filter="promotions" aria-pressed="false">Promotions</button>
         </div>
 
-        <!-- Carte de Véhicule 1 - Lamborghini Urus -->
-        <div class="car-card nouveaute" data-category="suv">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience SUV</div>
-                <div class="promo-tag">-10% pour les réservations de fin de semaine</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">Lamborghini Urus</h2>
-            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
-
-            <div class="car-info">
-                <div class="car-specs">
-                    Puissance : 650cv<br>
-                    CO2 : 200g<br>
-                    Caution : 4500€<br>
-                    <span class="car-description">Un SUV puissant alliant performance et luxe, parfait pour les aventures urbaines et hors route.</span>
+        <!-- Conteneur pour les cartes de véhicules -->
+        <div class="car-cards-container">
+            <!-- Carte de Véhicule 1 - Lamborghini Urus -->
+            <article class="car-card nouveaute" data-category="suv">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/urus%20am%20loc.jpg?raw=true" alt="Lamborghini Urus" class="car-image" loading="lazy">
+                <div class="tag-container">
+                    <span class="experience-tag">Expérience SUV</span>
+                    <span class="promo-tag">-10% pour les réservations de fin de semaine</span>
+                    <span class="available-tag">Disponible maintenant</span>
                 </div>
 
-                <div class="feature-list">
-                    <div>⚡ 0-100 km/h : 3.6s</div>
-                    <div>🔧 Transmission intégrale</div>
-                    <div>🛋️ Intérieur Haut de Gamme</div>
-                    <div>🌐 Connectivité Avancée</div>
-                </div>
+                <h2 class="car-title">Lamborghini Urus</h2>
+                <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
 
-                <div class="price-info">
-                    À partir de 900€ <span class="price-period">/jour</span>
-                </div>
-
-                <div class="rental-options">
-                    <div class="rental-option">
-                        <div class="option-title">Aventure Urbaine</div>
-                        <div class="option-price">900€</div>
-                        <div class="option-details">24h de conduite - 300km inclus + assistance premium</div>
+                <div class="car-info" aria-hidden="true">
+                    <div class="car-specs">
+                        Puissance : 650cv<br>
+                        CO2 : 200g<br>
+                        Caution : 4500€<br>
+                        <span class="car-description">Un SUV puissant alliant performance et luxe, parfait pour les aventures urbaines et hors route.</span>
                     </div>
 
-                    <div class="rental-option premium">
-                        <div class="option-title">Séjour Luxe</div>
-                        <div class="option-price">2000€</div>
-                        <div class="option-details">Du vendredi 10h au lundi 18h - 700km inclus + équipement de luxe</div>
+                    <div class="feature-list">
+                        <div>⚡ 0-100 km/h : 3.6s</div>
+                        <div>🔧 Transmission intégrale</div>
+                        <div>🛋️ Intérieur Haut de Gamme</div>
+                        <div>🌐 Connectivité Avancée</div>
+                    </div>
+
+                    <div class="price-info">
+                        À partir de 900€ <span class="price-period">/jour</span>
+                    </div>
+
+                    <div class="rental-options">
+                        <div class="rental-option">
+                            <div class="option-title">Aventure Urbaine</div>
+                            <div class="option-price">900€</div>
+                            <div class="option-details">24h de conduite - 300km inclus + assistance premium</div>
+                        </div>
+
+                        <div class="rental-option premium">
+                            <div class="option-title">Séjour Luxe</div>
+                            <div class="option-price">2000€</div>
+                            <div class="option-details">Du vendredi 10h au lundi 18h - 700km inclus + équipement de luxe</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </article>
+
+            <!-- Carte de Véhicule 2 - Golf 8R -->
+            <article class="car-card" data-category="sportives">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%208%20r%20am%20location.jpg?raw=true" alt="Golf 8R" class="car-image" loading="lazy">
+                <div class="tag-container">
+                    <span class="experience-tag">Expérience Sportive</span>
+                    <span class="promo-tag">-12% pour les réservations en semaine</span>
+                    <span class="available-tag">Disponible maintenant</span>
+                </div>
+
+                <h2 class="car-title">Golf 8R</h2>
+                <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
+
+                <div class="car-info" aria-hidden="true">
+                    <div class="car-specs">
+                        Puissance : 320cv<br>
+                        CO2 : 150g<br>
+                        Caution : 2800€<br>
+                        <span class="car-description">Performance et agilité réunies dans une compacte emblématique. Parfaite pour la conduite urbaine et sportive.</span>
+                    </div>
+
+                    <div class="feature-list">
+                        <div>⚡ 0-100 km/h : 4.7s</div>
+                        <div>🛡️ Système de Sécurité Avancé</div>
+                        <div>🎵 Système Audio Premium</div>
+                        <div>📱 Connectivité Intégrée</div>
+                    </div>
+
+                    <div class="price-info">
+                        À partir de 400€ <span class="price-period">/jour</span>
+                    </div>
+
+                    <div class="rental-options">
+                        <div class="rental-option">
+                            <div class="option-title">Conduite Sportive</div>
+                            <div class="option-price">400€</div>
+                            <div class="option-details">24h de conduite dynamique - 200km inclus + assistance routière</div>
+                        </div>
+
+                        <div class="rental-option premium">
+                            <div class="option-title">Week-end Sport</div>
+                            <div class="option-price">900€</div>
+                            <div class="option-details">Du vendredi 10h au dimanche 20h - 500km inclus + accès à des circuits locaux</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Carte de Véhicule 3 - Golf GTI -->
+            <article class="car-card nouveaute" data-category="sportives">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%20GTI%20am%20location.jpg?raw=true" alt="Golf GTI" class="car-image" loading="lazy">
+                <div class="tag-container">
+                    <span class="experience-tag">Expérience Dynamique</span>
+                    <span class="promo-tag">-8% pour les réservations anticipées</span>
+                    <span class="available-tag">Disponible maintenant</span>
+                </div>
+
+                <h2 class="car-title">Golf GTI</h2>
+                <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
+
+                <div class="car-info" aria-hidden="true">
+                    <div class="car-specs">
+                        Puissance : 245cv<br>
+                        CO2 : 140g<br>
+                        Caution : 2500€<br>
+                        <span class="car-description">Un classique revisité pour offrir une expérience de conduite exaltante tout en conservant le confort nécessaire.</span>
+                    </div>
+
+                    <div class="feature-list">
+                        <div>⚡ 0-100 km/h : 6.3s</div>
+                        <div>🛡️ Contrôle de Traction</div>
+                        <div>🎵 Audio Surround</div>
+                        <div>📱 Système Navigation Intégré</div>
+                    </div>
+
+                    <div class="price-info">
+                        À partir de 350€ <span class="price-period">/jour</span>
+                    </div>
+
+                    <div class="rental-options">
+                        <div class="rental-option">
+                            <div class="option-title">Balade Urbaine</div>
+                            <div class="option-price">350€</div>
+                            <div class="option-details">24h de conduite confortable - 180km inclus + assistance routière</div>
+                        </div>
+
+                        <div class="rental-option premium">
+                            <div class="option-title">Aventure de Week-end</div>
+                            <div class="option-price">800€</div>
+                            <div class="option-details">Du samedi 9h au lundi 19h - 450km inclus + équipement de voyage</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Carte de Véhicule 4 - RSQ3 -->
+            <article class="car-card" data-category="sportives">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/rsq3%20am%20location.jpg?raw=true" alt="RSQ3" class="car-image" loading="lazy">
+                <div class="tag-container">
+                    <span class="experience-tag">Expérience Haute Performance</span>
+                    <span class="promo-tag">-10% pour les réservations de groupe</span>
+                    <span class="available-tag">Disponible maintenant</span>
+                </div>
+
+                <h2 class="car-title">RSQ3</h2>
+                <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
+
+                <div class="car-info" aria-hidden="true">
+                    <div class="car-specs">
+                        Puissance : 310cv<br>
+                        CO2 : 160g<br>
+                        Caution : 2700€<br>
+                        <span class="car-description">Alliant puissance et élégance, le RSQ3 est conçu pour ceux qui recherchent une performance sans compromis.</span>
+                    </div>
+
+                    <div class="feature-list">
+                        <div>⚡ 0-100 km/h : 5.1s</div>
+                        <div>🛡️ Système de Sécurité Avancé</div>
+                        <div>🎵 Audio de Haute Fidélité</div>
+                        <div>📱 Connectivité Avancée</div>
+                    </div>
+
+                    <div class="price-info">
+                        À partir de 420€ <span class="price-period">/jour</span>
+                    </div>
+
+                    <div class="rental-options">
+                        <div class="rental-option">
+                            <div class="option-title">Conduite de Précision</div>
+                            <div class="option-price">420€</div>
+                            <div class="option-details">24h de performance - 220km inclus + assistance premium</div>
+                        </div>
+
+                        <div class="rental-option premium">
+                            <div class="option-title">Week-end Dynamique</div>
+                            <div class="option-price">850€</div>
+                            <div class="option-details">Du vendredi 11h au dimanche 21h - 500km inclus + session de conduite offerte</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
-
-        <!-- Carte de Véhicule 2 - Golf 8R -->
-        <div class="car-card" data-category="sportives">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%208%20r%20am%20location.jpg?raw=true" alt="Golf 8R" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience Sportive</div>
-                <div class="promo-tag">-12% pour les réservations en semaine</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">Golf 8R</h2>
-            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
-
-            <div class="car-info">
-                <div class="car-specs">
-                    Puissance : 320cv<br>
-                    CO2 : 150g<br>
-                    Caution : 2800€<br>
-                    <span class="car-description">Performance et agilité réunies dans une compacte emblématique. Parfaite pour la conduite urbaine et sportive.</span>
-                </div>
-
-                <div class="feature-list">
-                    <div>⚡ 0-100 km/h : 4.7s</div>
-                    <div>🛡️ Système de Sécurité Avancé</div>
-                    <div>🎵 Système Audio Premium</div>
-                    <div>📱 Connectivité Intégrée</div>
-                </div>
-
-                <div class="price-info">
-                    À partir de 400€ <span class="price-period">/jour</span>
-                </div>
-
-                <div class="rental-options">
-                    <div class="rental-option">
-                        <div class="option-title">Conduite Sportive</div>
-                        <div class="option-price">400€</div>
-                        <div class="option-details">24h de conduite dynamique - 200km inclus + assistance routière</div>
-                    </div>
-
-                    <div class="rental-option premium">
-                        <div class="option-title">Week-end Sport</div>
-                        <div class="option-price">900€</div>
-                        <div class="option-details">Du vendredi 10h au dimanche 20h - 500km inclus + accès à des circuits locaux</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Carte de Véhicule 3 - Golf GTI -->
-        <div class="car-card nouveaute" data-category="sportives">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/golf%20GTI%20am%20location.jpg?raw=true" alt="Golf GTI" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience Dynamique</div>
-                <div class="promo-tag">-8% pour les réservations anticipées</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">Golf GTI</h2>
-            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
-
-            <div class="car-info">
-                <div class="car-specs">
-                    Puissance : 245cv<br>
-                    CO2 : 140g<br>
-                    Caution : 2500€<br>
-                    <span class="car-description">Un classique revisité pour offrir une expérience de conduite exaltante tout en conservant le confort nécessaire.</span>
-                </div>
-
-                <div class="feature-list">
-                    <div>⚡ 0-100 km/h : 6.3s</div>
-                    <div>🛡️ Contrôle de Traction</div>
-                    <div>🎵 Audio Surround</div>
-                    <div>📱 Système Navigation Intégré</div>
-                </div>
-
-                <div class="price-info">
-                    À partir de 350€ <span class="price-period">/jour</span>
-                </div>
-
-                <div class="rental-options">
-                    <div class="rental-option">
-                        <div class="option-title">Balade Urbaine</div>
-                        <div class="option-price">350€</div>
-                        <div class="option-details">24h de conduite confortable - 180km inclus + assistance routière</div>
-                    </div>
-
-                    <div class="rental-option premium">
-                        <div class="option-title">Aventure de Week-end</div>
-                        <div class="option-price">800€</div>
-                        <div class="option-details">Du samedi 9h au lundi 19h - 450km inclus + équipement de voyage</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Carte de Véhicule 4 - RSQ3 -->
-        <div class="car-card" data-category="sportives">
-            <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/rsq3%20am%20location.jpg?raw=true" alt="RSQ3" class="car-image">
-            <div class="tag-container">
-                <div class="experience-tag">Expérience Haute Performance</div>
-                <div class="promo-tag">-10% pour les réservations de groupe</div>
-                <div class="available-tag">Disponible maintenant</div>
-            </div>
-
-            <h2 class="car-title">RSQ3</h2>
-            <button class="toggle-info" aria-expanded="false">Cliquer pour découvrir plus</button>
-
-            <div class="car-info">
-                <div class="car-specs">
-                    Puissance : 310cv<br>
-                    CO2 : 160g<br>
-                    Caution : 2700€<br>
-                    <span class="car-description">Alliant puissance et élégance, le RSQ3 est conçu pour ceux qui recherchent une performance sans compromis.</span>
-                </div>
-
-                <div class="feature-list">
-                    <div>⚡ 0-100 km/h : 5.1s</div>
-                    <div>🛡️ Système de Sécurité Avancé</div>
-                    <div>🎵 Audio de Haute Fidélité</div>
-                    <div>📱 Connectivité Avancée</div>
-                </div>
-
-                <div class="price-info">
-                    À partir de 420€ <span class="price-period">/jour</span>
-                </div>
-
-                <div class="rental-options">
-                    <div class="rental-option">
-                        <div class="option-title">Conduite de Précision</div>
-                        <div class="option-price">420€</div>
-                        <div class="option-details">24h de performance - 220km inclus + assistance premium</div>
-                    </div>
-
-                    <div class="rental-option premium">
-                        <div class="option-title">Week-end Dynamique</div>
-                        <div class="option-price">850€</div>
-                        <div class="option-details">Du vendredi 11h au dimanche 21h - 500km inclus + session de conduite offerte</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <!-- Pied de page -->
     <footer>
@@ -801,6 +793,7 @@
             hamburger.addEventListener('click', toggleMenu);
             hamburger.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
                     toggleMenu();
                 }
             });
@@ -817,7 +810,7 @@
                 });
             });
 
-            // Gestion des transitions de page
+            // Gestion des transitions de page (si applicable)
             const ctaButtons = document.querySelectorAll('.cta-button');
 
             ctaButtons.forEach(button => {
@@ -882,47 +875,25 @@
             categories.forEach(category => {
                 category.addEventListener('click', (e) => {
                     e.preventDefault();
-                    categories.forEach(c => c.classList.remove('active'));
+                    categories.forEach(c => {
+                        c.classList.remove('active');
+                        c.setAttribute('aria-selected', 'false');
+                    });
                     category.classList.add('active');
+                    category.setAttribute('aria-selected', 'true');
                     filterCars();
                 });
             });
 
-            // Gestion des clics sur les boutons de filtre avec effet de glissement
+            // Gestion des clics sur les boutons de filtre
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Détermine la direction du slide
-                    const previousActive = document.querySelector('.filter-btn.active');
-                    let direction = 'right';
-                    if (btn === previousActive.nextElementSibling) {
-                        direction = 'left';
-                    }
-
-                    // Animer le bouton précédent
-                    if (previousActive) {
-                        previousActive.classList.remove('active');
-                        if (direction === 'left') {
-                            previousActive.classList.add('slide-out-left');
-                        } else {
-                            previousActive.classList.add('slide-out-right');
-                        }
-                        previousActive.addEventListener('animationend', () => {
-                            previousActive.classList.remove('slide-out-left', 'slide-out-right');
-                        }, { once: true });
-                    }
-
-                    // Animer le bouton cliqué
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
                     btn.classList.add('active');
-                    if (direction === 'left') {
-                        btn.classList.add('slide-in-left');
-                    } else {
-                        btn.classList.add('slide-in-right');
-                    }
-                    btn.addEventListener('animationend', () => {
-                        btn.classList.remove('slide-in-left', 'slide-in-right');
-                    }, { once: true });
-
-                    // Appliquer le filtre
+                    btn.setAttribute('aria-pressed', 'true');
                     filterCars();
                 });
             });
@@ -931,10 +902,10 @@
             toggleButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const carInfo = button.nextElementSibling;
-                    carInfo.classList.toggle('active');
-                    const expanded = carInfo.classList.contains('active');
-                    button.textContent = expanded ? 'Cliquer pour réduire' : 'Cliquer pour découvrir plus';
-                    button.setAttribute('aria-expanded', expanded);
+                    const isActive = carInfo.classList.toggle('active');
+                    button.textContent = isActive ? 'Cliquer pour réduire' : 'Cliquer pour découvrir plus';
+                    button.setAttribute('aria-expanded', isActive);
+                    carInfo.setAttribute('aria-hidden', !isActive);
                 });
             });
         });
