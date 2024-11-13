@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entretien Mécanique - AM Location</title>
+    <!-- Intégration de la police Inter via Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Couleurs */
+            --color-white: #FFFFFF;
+            --color-dark: #1A1A1A;
+            --color-light-dark: #333333;
+            --color-primary: #007bff;
+            --color-primary-hover: #0056b3;
+
+            /* Dimensions */
+            --transition-speed: 0.3s;
+            --max-width: 1200px;
+            --header-height: 60px;
+
+            /* Typographie */
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background: var(--color-dark);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: opacity var(--transition-speed);
+            opacity: 1;
+        }
+
+        body.fade-out {
+            opacity: 0;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            max-height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--color-white);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--color-white);
+            transition: width var(--transition-speed);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--color-white);
+            margin: 4px;
+            transition: all var(--transition-speed);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: var(--header-height);
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .service-section {
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--color-primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p, ul {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background var(--transition-speed);
+        }
+
+        .cta-button:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .expertise-badge {
+            display: inline-block;
+            background: var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        /* Styles pour le pied de page */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--color-white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signature {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Styles Responsifs */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--header-height);
+                right: 0;
+                background: rgba(0,0,0,0.95);
+                flex-direction: column;
+                width: 200px;
+                height: calc(100% - var(--header-height));
+                transform: translateX(100%);
+                transition: transform var(--transition-speed);
+                padding-top: 2rem;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://github.com/InoVex-InnoMotech/Location/blob/main/images/xs83o899.png?raw=true" alt="Logo AM Location" loading="lazy">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Accueil</a>
+                <a href="#">Véhicules</a>
+                <a href="#">Services</a>
+                <a href="entretien.html" class="active">Entretien Mécanique</a>
+                <a href="#">À propos</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger" aria-label="Menu de navigation" aria-expanded="false" role="button" tabindex="0">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="service-section">
+            <h1>Entretien Mécanique Automobile</h1>
+            <p>Excellence et professionnalisme au service de votre véhicule</p>
+        </div>
+
+        <div class="service-section">
+            <h2>Notre Expertise à Trans-en-Provence</h2>
+            <p>AM Location s'associe à ACH Auto pour vous offrir un service complet et professionnel de réparation automobile, toutes marques confondues. Notre équipe d'experts qualifiés s'engage à maintenir votre véhicule dans un état optimal.</p>
+            
+            <div class="expertise-badges">
+                <span class="expertise-badge">Toutes marques</span>
+                <span class="expertise-badge">Diagnostic électronique</span>
+                <span class="expertise-badge">Révision complète</span>
+                <span class="expertise-badge">Réparation</span>
+            </div>
+        </div>
+
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Entretien Mécanique Complet</h3>
+                <ul>
+                    <li>Remplacement du kit d'embrayage</li>
+                    <li>Changement de la courroie de distribution</li>
+                    <li>Montage et équilibrage de pneus</li>
+                    <li>Révision générale</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Diagnostic Électronique</h3>
+                <ul>
+                    <li>Analyse complète des systèmes</li>
+                    <li>Vérification des capteurs</li>
+                    <li>Contrôle des actionneurs</li>
+                    <li>Diagnostic moteur</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Maintenance Préventive</h3>
+                <ul>
+                    <li>Remplacement de la batterie</li>
+                    <li>Changement des plaquettes de frein</li>
+                    <li>Remplacement des disques de frein</li>
+                    <li>Contrôle des amortisseurs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>Pourquoi Choisir Nos Services ?</h2>
+            <ul>
+                <li>Expertise multi-marques</li>
+                <li>Équipement de diagnostic moderne</li>
+                <li>Techniciens qualifiés</li>
+                <li>Devis transparents</li>
+                <li>Service client personnalisé</li>
+            </ul>
+            
+            <a href="#contact" class="cta-button">Prendre Rendez-vous</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 AM Location. Tous droits réservés.</p>
+            <div class="signature">
+                Créé et conçu par InoVex
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gestion du menu hamburger
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            const toggleMenu = () => {
+                const isActive = navLinks.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isActive);
+            };
+
+            hamburger.addEventListener('click', toggleMenu);
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    toggleMenu();
+                }
+            });
+
+            // Fermeture automatique du menu après un clic sur un lien
+            const navLinksElements = navLinks.querySelectorAll('a');
+            navLinksElements.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', false);
+                });
+            });
+
+            // Gestion des transitions de page
+            const ctaButtons = document.querySelectorAll('.cta-button');
+
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith("#")) {
+                        // Scroll vers l'ancre
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        // Transition de page
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
